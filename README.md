@@ -26,7 +26,7 @@ The design uses **16-bit fixed-point Q16.0 arithmetic**:
 - Each PE performs a **16×16 → 32-bit multiply**
 - Accumulation is done using a wider internal accumulator
 - Results are **saturated to signed 16-bit** (`[-32768, 32767]`) at the output
-
+. 
 This approach keeps the hardware simple and efficient while matching typical systolic-array behavior.
 
 ---
@@ -47,7 +47,25 @@ Example instruction stream:
 ---
 
 ## Testbench Waveform
+Memory A and Memory B each contain **64 addressable locations** (address range **0–63**).
 
-![Testbench waveform showing memory initialization and ap_start](pic1.png)
+### 1. Filling Memory A
 
-![Testbench waveform showing ap_done and output memory reads](pic2.png)
+As shown in **Figure 1 (pic1)** and **Figure 2 (pic2)**, the first step in the testbench is to initialize **Memory A**.  
+All **64 entries of Memory A** are written sequentially using the signals **`enA`**, **`addrA`**, and **`dataA`**, which are highlighted in **blue** in the waveform.  
+The data values are loaded from `a_file.txt` into addresses **0 through 63**.
+
+![Figure 1: Memory A initialization waveform](pic1.png)
+
+![Figure 2: Continued Memory A initialization waveform](pic2.png)
+
+---
+
+### 2. Filling Memory B
+
+After Memory A is fully initialized, the testbench proceeds to initialize **Memory B**.  
+Memory B is written using the signals **`enB`**, **`addrB`**, and **`dataB`**, which are highlighted in **yellow** in the waveform.  
+The data values for Memory B are loaded from `b_file.txt`.
+
+Although Memory A and Memory B support **simultaneous writes** through independent write interfaces, they are intentionally initialized **separately in the testbench**. This choice keeps the waveform cleaner and makes the memory initialization process easier to follow and debug.
+
