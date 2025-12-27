@@ -31,11 +31,8 @@ This approach keeps the hardware simple and efficient while matching typical sys
 
 ---
 
-## Instruction-Driven Execution
-
-I use an **instruction memory** to control which matrix sizes are executed.
-
-- Each instruction is an integer representing matrix size `N`
-- Instruction `0` marks the end of execution
-- For a non-zero instruction `N`, the accelerator performs:
-  - **(N×4) × (4×N) → (N×N)** matrix multiplication
+Example instruction stream:
+- `[4, 8, 16]`
+  - compute **4×4 = (4×4) × (4×4)**
+  - compute **8×8 = (8×4) × (4×8)**
+  - compute **16×16 = (16×4) × (4×16)**
