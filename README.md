@@ -1,52 +1,41 @@
 # systollic_array_4x4
 
-4×4 Systolic Array accelerator in Verilog with on-chip memories, instruction-driven controller, testbench, and PPA evaluation (power, performance, area).
+In this project, I designed and verified a **4×4 systolic array accelerator** in Verilog that performs matrix–matrix multiplication using **16-bit fixed-point arithmetic**. I also built the full system around the array, including memories, a controller, a testbench, and evaluated the design’s **power, performance, and area (PPA)**.
 
-## Project Goal
-Design and verify a **4×4 systolic array** that performs matrix-matrix multiplication (MMM) using **16-bit fixed-point Q16.0** multiply-accumulate (MAC). The full system includes:
-- 4×4 systolic array (processing elements)
-- Memory A (data input)
-- Memory B (data input)
-- Instruction memory (matrix size sequence)
-- Output memory (stores computed C results)
-- Controller (drives memory read, systolic array flow, ap_start/ap_done)
+---
 
-## Requirements (from spec)
-Your design contains:
-- Systolic array supporting **16-bit fixed-point multiplication & accumulation**
-- Two memory blocks feeding the array (A and B)
-- Controller controlling memory + systolic array
-- Output memory storing results
-- Instruction memory storing matrix sizes
+## Project Overview
 
-### Top-level IO
-The top module uses:
-- `clk`, `rst`
-- `addrA`, `enA`, `dataA` (write Memory A)
-- `addrB`, `enB`, `dataB` (write Memory B)
-- `addrI`, `enI`, `dataI` (write Instruction Memory)
-- `addrO`, `dataO` (read Output Memory)
-- `ap_start` (pulse)
-- `ap_done` (level)
+My goal was to implement a complete hardware accelerator, not just the compute core. The design includes:
 
-## Fixed-Point Format
-This implementation uses **Q16.0**:
-- `a_i`, `b_i`: signed 16-bit integers
-- Multiply: 16×16 → 32-bit signed product
-- Accumulate: internal wider accumulator
-- Output: saturated to signed 16-bit (`[-32768, 32767]`) when writing/reading results
+- A **4×4 systolic array** composed of processing elements (PEs)
+- Two input memories (A and B) that feed data into the array
+- An instruction memory that controls execution
+- An output memory to store results
+- A controller that orchestrates data movement and computation
+- A full Verilog testbench and Python golden model for verification
 
-> Note: “fixed-point” here is treated as integer fixed-point (no fractional bits).
+The system supports multiple matrix sizes through an instruction stream and follows a clean `ap_start / ap_done` execution model.
 
-## Instruction Behavior
-Instruction is a 5-bit integer representing the matrix size `N`.
+---
 
-- If instruction is `0`: **end of execution**
-- Otherwise: perform one MMM of size:
-  - **N×4** multiplied by **4×N** → **N×N**
+## Fixed-Point Arithmetic
 
-Example instruction stream:
-- `[4, 8, 16]`
-  - compute **4×4 = (4×4) × (4×4)**
-  - compute **8×8 = (8×4) × (4×8)**
-  - compute **16×16 = (16×4) × (4×16)**
+The design uses **16-bit fixed-point Q16.0 arithmetic**:
+- Inputs (`a_i`, `b_i`) are signed 16-bit integers
+- Each PE performs a **16×16 → 32-bit multiply**
+- Accumulation is done using a wider internal accumulator
+- Results are **saturated to signed 16-bit** (`[-32768, 32767]`) at the output
+
+This approach keeps the hardware simple and efficient while matching typical systolic-array behavior.
+
+---
+
+## Instruction-Driven Execution
+
+I use an **instruction memory** to control which matrix sizes are executed.
+
+- Each instruction is an integer representing matrix size `N`
+- Instruction `0` marks the end of execution
+- For a non-zero instruction `N`, the accelerator performs:
+  - **(N×4) × (4×N) → (N×N)** matrix multiplication
