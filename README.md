@@ -43,3 +43,10 @@ Example instruction stream:
   - compute **4×4 = (4×4) × (4×4)**
   - compute **8×8 = (8×4) × (4×8)**
   - compute **16×16 = (16×4) × (4×16)**
+    
+---
+
+## Testbench's waveform
+![Testbench waveform showing memory initialization and ap_start](images/Screenshot (23).png)
+
+![Testbench waveform showing ap_done and output memory reads](images/Screenshot (24).png)
