@@ -46,7 +46,14 @@ Example instruction stream:
     
 ---
 
-## Testbench's waveform
-![Testbench waveform showing memory initialization and ap_start](images/Screenshot (23).png)
+## Testbench Waveform
 
-![Testbench waveform showing ap_done and output memory reads](images/Screenshot (24).png)
+<p align="center">
+  <img src="images/Screenshot (23).png" width="700"><br>
+  <em>Figure 1: Testbench waveform showing memory initialization and ap_start pulse</em>
+</p>
+
+<p align="center">
+  <img src="images/Screenshot (24).png" width="700"><br>
+  <em>Figure 2: Testbench waveform showing ap_done assertion and output memory reads</em>
+</p>
