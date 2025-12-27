@@ -63,9 +63,12 @@ The data values are loaded from `a_file.txt` into addresses **0 through 63**.
 
 ### 2. Filling Memory B
 
-After Memory A is fully initialized, the testbench proceeds to initialize **Memory B**.  
+After Memory A is fully initialized, the testbench proceeds to initialize **Memory B**. ( shown in **Figure 3 (pic3)** and **Figure 4 (pic4)**)
 Memory B is written using the signals **`enB`**, **`addrB`**, and **`dataB`**, which are highlighted in **yellow** in the waveform.  
 The data values for Memory B are loaded from `b_file.txt`.
+![Figure 3: Memory A initialization waveform](pic3.png)
+
+![Figure 4: Continued Memory A initialization waveform](pic4.png)
 
 Although Memory A and Memory B support **simultaneous writes** through independent write interfaces, they are intentionally initialized **separately in the testbench**. This choice keeps the waveform cleaner and makes the memory initialization process easier to follow and debug.
 
