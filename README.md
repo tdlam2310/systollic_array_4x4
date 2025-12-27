@@ -13,7 +13,7 @@ My goal was to implement a complete hardware accelerator, not just the compute c
 - An instruction memory that controls execution
 - An output memory to store results
 - A controller that orchestrates data movement and computation
-- A full Verilog testbench and Python golden model for verification
+- A full SystemVerilog testbench and Python golden model for verification
 
 The system supports multiple matrix sizes through an instruction stream and follows a clean `ap_start / ap_done` execution model.
 
