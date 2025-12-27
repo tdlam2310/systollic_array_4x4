@@ -66,9 +66,27 @@ The data values are loaded from `a_file.txt` into addresses **0 through 63**.
 After Memory A is fully initialized, the testbench proceeds to initialize **Memory B**. ( shown in **Figure 3 (pic3)** and **Figure 4 (pic4)**)
 Memory B is written using the signals **`enB`**, **`addrB`**, and **`dataB`**, which are highlighted in **yellow** in the waveform.  
 The data values for Memory B are loaded from `b_file.txt`.
-![Figure 3: Memory A initialization waveform](pic3.png)
+![Figure 3: Memory B initialization waveform](pic3.png)
 
-![Figure 4: Continued Memory A initialization waveform](pic4.png)
+![Figure 4: Continued Memory B initialization waveform](pic4.png)
 
 Although Memory A and Memory B support **simultaneous writes** through independent write interfaces, they are intentionally initialized **separately in the testbench**. This choice keeps the waveform cleaner and makes the memory initialization process easier to follow and debug.
+
+---
+
+### 3. Filling Instruction Memory
+The instruction is a **5-bit value** that can take one of the following values: **0, 4, 8, or 16**.  
+Each instruction specifies the matrix size to be executed, where an instruction value of **0** indicates the end of execution.
+
+The instruction memory contains **4 addressable locations**, corresponding to **`addrI = 0, 1, 2, 3`**.  
+As shown in **Figure 5 (pic5)**, I initialize the instruction memory using the signals highlighted in **pink** in the waveform.
+
+Specifically:
+- Instruction **4** is written to address `addrI = 0`
+- Instruction **8** is written to address `addrI = 1`
+- Instruction **16** is written to address `addrI = 2`
+- Instruction **0** is written to address `addrI = 3`
+
+This instruction sequence causes the accelerator to perform a **4×4**, followed by an **8×8**, and then a **16×16** matrix multiplication, after which execution terminates.
+![Figure 5: Filling instruction memory initialization](pic5.png)
 
