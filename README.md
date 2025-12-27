@@ -31,6 +31,13 @@ This approach keeps the hardware simple and efficient while matching typical sys
 
 ---
 
+## Instruction Behavior
+Instruction is a 5-bit integer representing the matrix size `N`.
+
+- If instruction is `0`: **end of execution**
+- Otherwise: perform one MMM of size:
+  - **N×4** multiplied by **4×N** → **N×N**
+
 Example instruction stream:
 - `[4, 8, 16]`
   - compute **4×4 = (4×4) × (4×4)**
