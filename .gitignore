@@ -1,0 +1,24 @@
+*.xpr
+*.jou
+*.log
+*.str
+
+*.cache/
+*.runs/
+*.hw/
+*.sim/
+*.ip_user_files/
+
+# Vivado srcs folder (dot form)
+*.srcs/
+*.srcs/**
+
+# Project-prefixed Vivado folders (underscore form)
+*_cache/
+*_runs/
+*_hw/
+*_sim/
+*_ip_user_files/
+*_srcs/
+
+
