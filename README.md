@@ -173,3 +173,86 @@ Row 3 | r_30 | r_31 | r_32 | r_33 |
 ### Notes
 - This module is structural wiring only; accumulation, saturation, and output gating behavior are handled inside `pe`.
 - Typically, assert `clear` at the beginning of a dot-product phase, hold `valid_i` during streaming, then assert `done` to read `r_ij`.
+
+## Memory Controller (`memory`)
+
+### Overview
+The `memory` module is a **64×16-bit scratchpad and streaming controller** designed to feed a **4×4 systolic array**. It supports tiled matrix multiplication for matrix sizes **4×4, 8×8, and 16×16** by breaking large matrices into **4×4 tiles**, streaming each tile into the array, and coordinating accumulator clearing and completion signaling.
+
+The module provides **four parallel output ports**, allowing up to four values to be injected into the systolic array per cycle in a timing pattern that matches systolic dataflow.
+
+---
+
+### Interface Summary
+
+### Inputs
+- `clk`, `rst`  
+  Clock and synchronous reset.
+
+- `en_data`  
+  Enables writes into the internal memory.
+
+- `addr` (6-bit), `data_in` (signed 16-bit)  
+  Write address and write data.
+
+- `A_or_B`  
+  Selects base address logic:
+  - `0` → Matrix A addressing
+  - `1` → Matrix B addressing
+
+- `start_compute`  
+  Starts streaming data to the systolic array.
+
+- `stop`  
+  Aborts computation and resets iteration counters.
+
+- `instruction`  
+  Matrix size selector:
+  - `4`  → single 4×4 tile
+  - `8`  → 8×8 matrix (4 tiles)
+  - `16` → 16×16 matrix (16 tiles)
+
+---
+
+### Outputs
+- `data_o_0 … data_o_3`  
+  **Four parallel signed 16-bit output ports**.  
+  These ports stream values from memory into the systolic array in a diagonal (wavefront) pattern.
+
+- `clear`  
+  Asserted at the end of each tile iteration to clear PE accumulators.
+
+- `mem_done`  
+  Asserted when all tile iterations complete.
+
+- `release_output`  
+  Timing pulse indicating results are ready to be captured.
+
+- `cnt`, `current_iteration_debug`  
+  Debug outputs exposing internal counters.
+
+---
+
+## Internal Organization
+
+### Memory
+- 64 entries of signed 16-bit data
+- Each **4×4 tile occupies 16 consecutive addresses**
+- Tile bases are always multiples of 16 (`<< 4`)
+
+---
+
+### Iteration Control
+- `counter` (0–10): controls per-cycle streaming behavior. In each iteration, counter goes from 0 to 10, then go back to 0 when a new iteration starts
+- `current_iteration`: selects the active tile pair
+- `total_iteration`: derived from `instruction`  
+  - `4`  → 1 iteration  
+  - `8`  → 4 iterations  
+  - `16` → 16 iterations  
+
+Key events:
+- `counter == 9`: end of one tile → assert `clear`
+- `counter == 10`: assert `release_output` so the output in each PE can be saved into output memory
+- Final tile completion → assert `mem_done`. This is to signal the instruction memory to move on to the next instruction
+
+---
