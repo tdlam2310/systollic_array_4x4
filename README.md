@@ -90,3 +90,8 @@ Specifically:
 This instruction sequence causes the accelerator to perform a **4×4**, followed by an **8×8**, and then a **16×16** matrix multiplication, after which execution terminates.
 ![Figure 5: Filling instruction memory initialization](pic5.png)
 
+## Architecture
+Block diagram from vivado: we have memory_output that stores the output of the systollic array, instruction memory that stores instruction, and DUT block that contains the controller, two memory blocks A and B that feed the data into the array, and the 4x4 systollic array itself
+
+PICTURE 1: OVERALL Picture
+![Figure 6: Overall picture](design1.png)
