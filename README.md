@@ -255,5 +255,5 @@ Key events:
 - `counter == 10`: assert `release_output` so the output in each PE can be saved into output memory
 - Final tile completion → assert `mem_done`. This is to signal the instruction memory to move on to the next instruction
 In each iteration, datas from Memory A and Memory B are streamed in the way shown in here (Note that the white blank at the end of two data cluster will be filled with 0)
-![drawing](array.jpg)
+![drawing](array.png)
 ---
