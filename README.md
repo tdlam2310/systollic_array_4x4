@@ -116,3 +116,27 @@ Block diagram from vivado: we have memory_output that stores the output of the s
 ![Figure 6: Overall picture](design1.png)
 ### PICTURE 2: DUT that consists of the systollic array 4x4, memory A and B, and controller
 ![Figure 6: Overall picture](array_with_mem-and_controller.png)
+
+# Documentation
+
+## Processing Element (PE)
+
+### Overview
+The `pe` module is a **signed multiply–accumulate (MAC) processing element** designed for systolic arrays. It multiplies two 16-bit signed inputs, accumulates the result internally, forwards operands to neighboring PEs, and outputs a **saturated 16-bit result** when computation is complete.
+
+### Interface Summary
+**Inputs:**  
+`clk`, `rst`, `valid_i`, `clear`, `done`, `a_i`, `b_i`  
+
+**Outputs:**  
+`a_o`, `b_o`, `acc_o`
+
+### Functionality
+- Computes `a_i × b_i` using signed arithmetic.
+- Accumulates results in a **40-bit internal accumulator** to prevent overflow.
+- Accumulation occurs only when `valid_i` is asserted.
+- When `done` is high, outputs the accumulated value with signed saturation (`±32767`).
+
+### Notes
+- Internal multiply width: 32 bits; accumulator width: 40 bits.
+- `acc_o` remains `0` until `done` is asserted.
