@@ -97,6 +97,13 @@ This instruction sequence causes the accelerator to perform a **4×4**, followed
 ### 6. Set dataO from 0 to 255 to access the data saved in the memory output, then saved all the data into `c_out_file.txt` (refer to two orange signals addrO and dataO)
 ![drawing](firstdata.png)
 ![drawing](lastdata.png)
+### 7. Use google colab to test with my Python model.
+1. Navigate to the `sim/` directory.
+2. Copy the provided Python code into `google_colab_test.py`.
+3. Run the script in Google Colab to generate the input files `a_file.txt` and `b_file.txt`.
+4. Use these files as inputs to the Vivado testbench.
+5. The testbench generates `c_out_file.txt`, which is then imported back into Google Colab for result verification. You should download c_out_file.txt and put it into your google colab notebook before you run the python script.
+
 ## Architecture
 Block diagram from vivado: we have memory_output that stores the output of the systollic array, instruction memory that stores instruction, and DUT block that contains the controller, two memory blocks A and B that feed the data into the array, and the 4x4 systollic array itself
 
