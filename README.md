@@ -94,7 +94,7 @@ This instruction sequence causes the accelerator to perform a **4×4**, followed
 ![Uploading image.png…](start.png)
 ### 5. ap_done toggles from 0 to 1, which signals that the system has finished (refer to the red signal on waveform)
 ![Uploading image.png…](done.png)
-### 6. Set dataO from 0 to 255 to access the data saved in the memory output, then saved all the data into `c_out_file.txt`
+### 6. Set dataO from 0 to 255 to access the data saved in the memory output, then saved all the data into `c_out_file.txt` (refer to two orange signals addrO and dataO)
 ![drawing](firstdata.png)
 ![drawing](lastdata.png)
 ## Architecture
