@@ -257,7 +257,15 @@ Key events:
 In each iteration, datas from Memory A and Memory B are streamed in the way shown in here 
 ![drawing](array.png)
 ---
-
+### IMPORTANT note
+`base_used` → base address used to access the data stored in the memory of the current 4×4 tile. Base_used logic varies based on A_or_B (A_or_B is 0 means the memory block is memory A, otherwise it is memory block B) 
+  During the **first iteration**, `base_used = 0`, so the 16 numbers with addresses `0` through `15` in the memory are fed into
+  into the systollic array. For each subsequent iteration, `base_used` increases
+  by `16`, and the next set of 16 data that are fed into the systollic array has the addresses from
+  `base_addr + 0` through `base_addr + 15`.
+In each iteration, datas from Memory A and Memory B are streamed in the way shown in here 
+![drawing](array.png)
+---
 ## Array With Memory Wrapper (`array_with_mem_wrapper`)
 
 ### Overview
