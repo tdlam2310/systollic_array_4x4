@@ -409,6 +409,8 @@ It provides a simple external interface to:
 ## Partial PPA Report
 
 ### Performance
+- Clock period:** **5.6 ns**  
+- **Equivalent frequency:** **≈178.6 MHz**
 - Setup WNS: **+1.205 ns**
 - Setup TNS: **0.000 ns**
 - Setup Failing Endpoints: **0**
