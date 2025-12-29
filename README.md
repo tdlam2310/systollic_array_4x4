@@ -311,6 +311,7 @@ In each iteration, datas from Memory A and Memory B are streamed in the way show
 
 ### Write Behavior
 - When `save_into_memory = 1`, the module writes:
+  
   memory[base + 0] ← data0
   
   memory[base + 1] ← data1
