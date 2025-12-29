@@ -283,4 +283,27 @@ In each iteration, datas from Memory A and Memory B are streamed in the way show
   addresses `0` through `15`. For each subsequent iteration, `base_addr` increases
   by `16`, and the next set of 16 results is written to
   `base_addr + 0` through `base_addr + 15`.
+## Output Memory (`memory_output`)
+
+### Overview
+
+`memory_output` is a **256×16-bit result memory** used to store the outputs of the **4×4 systolic array**. Each computation tile produces **16 results**, which are written into memory in parallel using a base address. The module also supports synchronous read access for result retrieval.
+
+---
+
+### Functionality
+- Stores **16 PE outputs at once** when `save_into_memory` is asserted.
+- Uses `save_base_memory` as the starting address for the current 4×4 tile.
+- Supports reading back stored results using `addrO`.
+
+---
+
+### Write Behavior
+- When `save_into_memory = 1`, the module writes:
+  memory[base + 0] ← data0
+  
+  memory[base + 1] ← data1
+  
+...
+memory[base + 15] ← data15
 
