@@ -433,7 +433,9 @@ It provides a simple external interface to:
 - URAM: **0**
 - IOBs: **82** (43.39%)
 - BUFGs: **1**
-  refer to my:
+
+  Refer to **`top_utilization_synth.rpt`** for detailed area utilization
+
 
 
 
