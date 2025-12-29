@@ -244,7 +244,7 @@ The module provides **four parallel output ports**, allowing up to four values t
 
 ### Iteration Control
 - `counter` (0–10): controls per-cycle streaming behavior. In each iteration, counter goes from 0 to 10, then go back to 0 when a new iteration starts
-- `current_iteration`: selects the active tile pair
+- `current_iteration`: selects the active tile 4x4 matrix pair from Memory A and Memory B
 - `total_iteration`: derived from `instruction`  
   - `4`  → 1 iteration  
   - `8`  → 4 iterations  
@@ -263,7 +263,8 @@ In each iteration, datas from Memory A and Memory B are streamed in the way show
   into the systollic array. For each subsequent iteration, `base_used` increases
   by `16`, and the next set of 16 data that are fed into the systollic array has the addresses from
   `base_addr + 0` through `base_addr + 15`. 
-**Important:** Each iteration takes 10 clock cycles, and the way we feed data depends on the signal `counter`. Please take a look at this video so you can visualize. This is how one iteration works:🎥 **https://www.youtube.com/watch?v=sJltBQ4MOHA**  
+
+**Another important thing that you should know:** Each iteration takes 10 clock cycles, and the way we feed data depends on the signal `counter`. Please take a look at this video so you can visualize. This is how one iteration works:🎥 **https://www.youtube.com/watch?v=sJltBQ4MOHA**  
 https://www.youtube.com/watch?v=sJltBQ4MOHA
 
 In each iteration, datas from Memory A and Memory B are streamed in the way shown in here 
