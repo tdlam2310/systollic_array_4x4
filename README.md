@@ -421,7 +421,18 @@ It provides a simple external interface to:
 ---
 
 ### Power
-- Not reported (power analysis not run)
+- Total On-Chip Power: **0.324 W**
+- Dynamic Power: **0.035 W** (11%)
+  - Clocks: **0.018 W** (52% of dynamic)
+  - Signals: **0.002 W** (5%)
+  - Logic: **0.005 W** (15%)
+  - DSPs: **0.002 W** (7%)
+  - I/O: **0.007 W** (21%)
+- Static (Leakage) Power: **0.288 W** (89%)
+
+- Junction Temperature: **25.8 °C**
+- Effective θJA: **2.3 °C/W**
+- Confidence Level: **Low** (synthesis-based estimate)
 
 ---
 
