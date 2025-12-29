@@ -304,6 +304,7 @@ In each iteration, datas from Memory A and Memory B are streamed in the way show
   
   memory[base + 1] ← data1
   
-...
-memory[base + 15] ← data15
+  ...
+
+ memory[base + 15] ← data15
 
