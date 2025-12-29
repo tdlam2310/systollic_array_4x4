@@ -404,5 +404,4 @@ It provides a simple external interface to:
 ---
 
 ### Notes
-- A value of `5'd0` acts as a **termination instruction**.
 - Designed to support chained matrix operations (e.g., 4×4 → 8×8 → 16×16).
