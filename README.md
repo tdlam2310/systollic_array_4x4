@@ -262,7 +262,9 @@ In each iteration, datas from Memory A and Memory B are streamed in the way show
   During the **first iteration**, `base_used = 0`, so the 16 numbers with addresses `0` through `15` in the memory are fed into
   into the systollic array. For each subsequent iteration, `base_used` increases
   by `16`, and the next set of 16 data that are fed into the systollic array has the addresses from
-  `base_addr + 0` through `base_addr + 15`.
+  `base_addr + 0` through `base_addr + 15`. 
+**Important:** Each iteration takes 10 clock cycles, and the way we feed data depends on the signal `counter`. Please take a look at this video so you can visualize. This is how one iteration works:🎥 **https://www.youtube.com/watch?v=sJltBQ4MOHA**  
+https://www.youtube.com/watch?v=sJltBQ4MOHA
 
 In each iteration, datas from Memory A and Memory B are streamed in the way shown in here 
 ![drawing](array.png)
