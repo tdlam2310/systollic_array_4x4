@@ -93,7 +93,7 @@ This instruction sequence causes the accelerator to perform a **4×4**, followed
 ## Architecture
 Block diagram from vivado: we have memory_output that stores the output of the systollic array, instruction memory that stores instruction, and DUT block that contains the controller, two memory blocks A and B that feed the data into the array, and the 4x4 systollic array itself
 
-###PICTURE 1: OVERALL Picture
+### PICTURE 1: OVERALL Architecture
 ![Figure 6: Overall picture](design1.png)
-###PICTURE 2: DUT that consists of the systollic array 4x4, memory A and B, and controller
+### PICTURE 2: DUT that consists of the systollic array 4x4, memory A and B, and controller
 ![Figure 6: Overall picture](array_with_mem-and_controller.png)
