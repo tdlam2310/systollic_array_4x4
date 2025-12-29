@@ -265,7 +265,6 @@ In each iteration, datas from Memory A and Memory B are streamed in the way show
   `base_addr + 0` through `base_addr + 15`. 
 
 **Another important thing that you should know:** Each iteration takes 10 clock cycles, and the way we feed data depends on the signal `counter`. Please take a look at this video so you can visualize. This is how one iteration works:🎥 **https://www.youtube.com/watch?v=sJltBQ4MOHA**  
-https://www.youtube.com/watch?v=sJltBQ4MOHA
 
 In each iteration, datas from Memory A and Memory B are streamed in the way shown in here 
 ![drawing](array.png)
@@ -418,7 +417,7 @@ It provides a simple external interface to:
 ### Notes
 - Designed to support chained matrix operations (e.g., 4×4 → 8×8 → 16×16).
 
-## Partial PPA Report
+## PPA Report
 
 ### Performance
 - Clock period:** **5.6 ns**  
