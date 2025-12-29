@@ -1,7 +1,7 @@
 # 4×4 Systolic Array Accelerator
 
 In this project, I designed and verified a **4×4 systolic array accelerator** in SystemVerilog that performs matrix–matrix multiplication using **16-bit fixed-point arithmetic**. I also built the full system around the array, including memories, a controller, a testbench, and evaluated the design’s **power, performance, and area (PPA)**.
-
+![drawing](arch.drawio.png)
 ---
 
 ## Project Overview
