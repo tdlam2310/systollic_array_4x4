@@ -95,7 +95,7 @@ This instruction sequence causes the accelerator to perform a **4×4**, followed
 ### 5. ap_done toggles from 0 to 1, which signals that the system has finished (refer to the red signal on waveform)
 ![Uploading image.png…](done.png)
 ### 6. Set dataO from 0 to 255 to access the data saved in the memory output, then saved all the data into `c_out_file.txt`
-![drawing](firstdata.png
+![drawing](firstdata.png)
 ![drawing](lastdata.png)
 ## Architecture
 Block diagram from vivado: we have memory_output that stores the output of the systollic array, instruction memory that stores instruction, and DUT block that contains the controller, two memory blocks A and B that feed the data into the array, and the 4x4 systollic array itself
