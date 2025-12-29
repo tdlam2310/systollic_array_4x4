@@ -294,7 +294,7 @@ In each iteration, datas from Memory A and Memory B are streamed in the way show
 ### Functionality
 - Stores **16 PE outputs at once** when `save_into_memory` is asserted.
 - Uses `save_base_memory` as the starting address for the current 4×4 tile.
-- Supports reading back stored results using `addrO`.
+- Supports reading stored results using `addrO`.
 
 ---
 
@@ -306,5 +306,19 @@ In each iteration, datas from Memory A and Memory B are streamed in the way show
   
   ...
 
- memory[base + 15] ← data15
+  memory[base + 15] ← data15
+  - `save_base_memory` must be ≤ 240 to prevent overflow (16 entries per tile).
+- On reset, all memory locations are cleared to zero.
+
+---
+
+### Read Behavior
+- Output `dataO` provides the value stored at address `addrO`.
+- Read is **synchronous** (registered on the clock edge).
+
+---
+
+### Notes
+- Designed to store tiled results for matrix sizes up to **16×16**.
+- Each tile occupies **16 consecutive memory locations**.
 
