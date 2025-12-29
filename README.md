@@ -156,19 +156,15 @@ The `pe` module is a **signed multiply–accumulate (MAC) processing element** d
   - `b_00, b_01, b_02, b_03`: 4 signed 16-bit values injected into the top edge (one per column)
 
 - **Outputs**
-  - `r_00 ... r_33`: 16 signed 16-bit results (one per PE), produced with saturation inside each PE
-  `r_00 ... r_33` form a 4×4 output matrix (one result per PE):
-
-            Col0      Col1      Col2      Col3
-         +---------+---------+---------+---------+
-Row0     |  r_00   |  r_01   |  r_02   |  r_03   |
-         +---------+---------+---------+---------+
-Row1     |  r_10   |  r_11   |  r_12   |  r_13   |
-         +---------+---------+---------+---------+
-Row2     |  r_20   |  r_21   |  r_22   |  r_23   |
-         +---------+---------+---------+---------+
-Row3     |  r_30   |  r_31   |  r_32   |  r_33   |
-         +---------+---------+---------+---------+
+  - r_00 ... r_33`: 16 signed 16-bit results (one per PE), produced with saturation inside each PE
+Row 0 | r_00 | r_01 | r_02 | r_03 |
++-----------+-----------+-----------+-----------+
+Row 1 | r_10 | r_11 | r_12 | r_13 |
++-----------+-----------+-----------+-----------+
+Row 2 | r_20 | r_21 | r_22 | r_23 |
++-----------+-----------+-----------+-----------+
+Row 3 | r_30 | r_31 | r_32 | r_33 |
++-----------+-----------+-----------+-----------+
 ### Dataflow (Systolic Connections)
 - `a` values are forwarded horizontally via `a_o` wires: `pe_00 → pe_01 → pe_02 → pe_03`, etc.
 - `b` values are forwarded vertically via `b_o` wires: `pe_00 → pe_10 → pe_20 → pe_30`, etc.
