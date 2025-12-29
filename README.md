@@ -269,22 +269,18 @@ In each iteration, datas from Memory A and Memory B are streamed in the way show
 - Loads matrix **A** and **B** into separate memories.
 - Streams up to **four values per cycle** from each memory into the systolic array.
 - Controls accumulation (`clear`), result release, and iteration flow.
-- Outputs **16 PE results** per tile and signals when results should be stored.
+- Outputs **16 PE results** per tile and signals when results should be stored. (r00 to r33)
 
 ---
 
 ### Key Signals
 - `start_compute` → starts streaming and MAC operations  
 - `clear` → resets PE accumulators between tiles  
-- `done` → asserted after all tiles complete  
-- `save_into_memory` → pulse indicating results are valid  
+- `done` → asserted after all tiles complete. This is to tell the instruction memory that the current instruction has finished, and it is time to move on with the next instruction
+- `save_into_memory` → pulse indicating results are valid to be saved into output memory
 - `base_addr` → base address used to store the results of the current 4×4 tile.  
   During the **first iteration**, `base_addr = 0`, so the 16 PE outputs are written to
   addresses `0` through `15`. For each subsequent iteration, `base_addr` increases
   by `16`, and the next set of 16 results is written to
   `base_addr + 0` through `base_addr + 15`.
-
----
-
-### Outputs (4×4 Result Grid)
 
