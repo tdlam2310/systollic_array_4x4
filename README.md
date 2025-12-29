@@ -344,6 +344,63 @@ The `instruction` module implements a **small instruction memory and sequencer**
 3. After each computation finishes (`systolic_array_done = 1`), the controller moves to the next instruction.
 4. When the current instruction is `0`, `ap_done` is asserted, indicating all instructions are complete.
 
+## Top-Level Module (`top`)
+
+### Overview
+`top` is the **system integration module** that connects:
+- **Input memories** for A and B (inside the DUT),
+- the **instruction sequencer** (`instruction`),
+- the **compute core** (systolic array + controllers inside `array_wtih_mem_with_controller`),
+- and the **output memory** (`memory_output`).
+
+It provides a simple external interface to:
+1) load matrices A and B,  
+2) load up to 4 instructions,  
+3) pulse `ap_start` to run,  
+4) read results back through `addrO → dataO`,  
+5) detect completion using `ap_done`.
+
+---
+
+### External Interface
+
+#### Load Matrix A / B
+- Write A: `enA`, `addrA`, `dataA`
+- Write B: `enB`, `addrB`, `dataB`
+
+#### Load Instruction Memory
+- Write instruction: `enI`, `addrI`, `dataI`
+- `dataI` is a 5-bit instruction (e.g., 4, 8, 16; 0 terminates)
+
+#### Start / Done
+- `ap_start`: pulse high to begin execution
+- `ap_done`: asserted when the instruction controller reaches a `0` instruction
+
+#### Read Output Memory
+- `addrO`: 8-bit read address
+- `dataO`: signed 16-bit output data at `addrO` (synchronous read)
+
+---
+
+### Internal Dataflow
+- `array_wtih_mem_with_controller` generates:
+  - PE outputs `r_00 … r_33`
+  - `save_into_memory` pulse when results are valid
+  - `save_base_memory` (tile base address)
+  - `done` signal (`systolic_array_done`) after finishing all tiles for the current instruction
+
+- `memory_output` stores each 4×4 tile result (16 values) as:
+  - `memory[base + 0] … memory[base + 15]`
+
+- `instruction` advances to the next instruction whenever `systolic_array_done` is asserted and sets `ap_done` when the current instruction becomes `0`.
+
+---
+
+### Notes
+- `instruction_wave` is a debug tap of the active instruction.
+- All 4×4 PE outputs are wired into output memory in row-major order:
+  `r_00..r_03, r_10..r_13, r_20..r_23, r_30..r_33`.
+
 ---
 
 ### Notes
