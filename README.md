@@ -157,6 +157,7 @@ The `pe` module is a **signed multiply–accumulate (MAC) processing element** d
 
 - **Outputs**
   - r_00 ... r_33`: 16 signed 16-bit results (one per PE), produced with saturation inside each PE
+    
 Row 0 | r_00 | r_01 | r_02 | r_03 |
 
 Row 1 | r_10 | r_11 | r_12 | r_13 |
