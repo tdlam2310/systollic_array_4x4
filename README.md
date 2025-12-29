@@ -257,3 +257,34 @@ Key events:
 In each iteration, datas from Memory A and Memory B are streamed in the way shown in here 
 ![drawing](array.png)
 ---
+
+## Array With Memory Wrapper (`array_with_mem_wrapper`)
+
+### Overview
+`array_with_mem_wrapper` is the **top-level module** that connects two memory controllers (`memA`, `memB`) to a **4×4 systolic array**. It manages data loading, tiled streaming, computation, and result timing for matrix sizes **4×4, 8×8, and 16×16**.
+
+---
+
+### Function
+- Loads matrix **A** and **B** into separate memories.
+- Streams up to **four values per cycle** from each memory into the systolic array.
+- Controls accumulation (`clear`), result release, and iteration flow.
+- Outputs **16 PE results** per tile and signals when results should be stored.
+
+---
+
+### Key Signals
+- `start_compute` → starts streaming and MAC operations  
+- `clear` → resets PE accumulators between tiles  
+- `done` → asserted after all tiles complete  
+- `save_into_memory` → pulse indicating results are valid  
+- `base_addr` → base address used to store the results of the current 4×4 tile.  
+  During the **first iteration**, `base_addr = 0`, so the 16 PE outputs are written to
+  addresses `0` through `15`. For each subsequent iteration, `base_addr` increases
+  by `16`, and the next set of 16 results is written to
+  `base_addr + 0` through `base_addr + 15`.
+
+---
+
+### Outputs (4×4 Result Grid)
+
