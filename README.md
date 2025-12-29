@@ -405,3 +405,37 @@ It provides a simple external interface to:
 
 ### Notes
 - Designed to support chained matrix operations (e.g., 4×4 → 8×8 → 16×16).
+
+## Partial PPA Report
+
+### Performance
+- Setup WNS: **+1.205 ns**
+- Setup TNS: **0.000 ns**
+- Setup Failing Endpoints: **0**
+- Hold WHS: **−0.016 ns**
+- Hold THS: **−0.279 ns**
+- Hold Failing Endpoints: **26**
+- Pulse Width WNS: **+2.525 ns**
+- Pulse Width Failing Endpoints: **0**
+
+---
+
+### Power
+- Not reported (power analysis not run)
+
+---
+
+### Area
+- LUTs: **3,496** (2.98%)
+- Flip-Flops: **6,356** (2.71%)
+- DSPs: **16** (1.28%)
+- BRAM: **0**
+- URAM: **0**
+- IOBs: **82** (43.39%)
+- BUFGs: **1**
+  refer to my:
+
+
+
+
+
