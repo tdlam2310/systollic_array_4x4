@@ -140,3 +140,40 @@ The `pe` module is a **signed multiply–accumulate (MAC) processing element** d
 ### Notes
 - Internal multiply width: 32 bits; accumulator width: 40 bits.
 - `acc_o` remains `0` until `done` is asserted.
+
+## 4×4 Systolic Array (`array_four_x_four`)
+
+### Overview
+`array_four_x_four` instantiates a **4×4 grid of `pe` modules** to implement a systolic-array style **matrix multiply / dot-product engine**. Inputs `a_*` stream **left → right** across each row, and inputs `b_*` stream **top → bottom** down each column. Each PE performs MAC accumulation and produces one output element `r_ij`.
+
+### Inputs / Outputs
+- **Inputs**
+  - `clk`, `rst`: clock and synchronous reset
+  - `valid_i`: enables MAC updates in all PEs
+  - `clear`: clears PE accumulators (start of a new computation)
+  - `done`: enables PE outputs to drive valid `r_ij`
+  - `a_00, a_10, a_20, a_30`: 4 signed 16-bit values injected into the left edge (one per row)
+  - `b_00, b_01, b_02, b_03`: 4 signed 16-bit values injected into the top edge (one per column)
+
+- **Outputs**
+  - `r_00 ... r_33`: 16 signed 16-bit results (one per PE), produced with saturation inside each PE
+  `r_00 ... r_33` form a 4×4 output matrix (one result per PE):
+
+            Col0      Col1      Col2      Col3
+         +---------+---------+---------+---------+
+Row0     |  r_00   |  r_01   |  r_02   |  r_03   |
+         +---------+---------+---------+---------+
+Row1     |  r_10   |  r_11   |  r_12   |  r_13   |
+         +---------+---------+---------+---------+
+Row2     |  r_20   |  r_21   |  r_22   |  r_23   |
+         +---------+---------+---------+---------+
+Row3     |  r_30   |  r_31   |  r_32   |  r_33   |
+         +---------+---------+---------+---------+
+### Dataflow (Systolic Connections)
+- `a` values are forwarded horizontally via `a_o` wires: `pe_00 → pe_01 → pe_02 → pe_03`, etc.
+- `b` values are forwarded vertically via `b_o` wires: `pe_00 → pe_10 → pe_20 → pe_30`, etc.
+- `valid_i`, `clear`, and `done` are broadcast to all PEs to keep computation synchronized.
+
+### Notes
+- This module is structural wiring only; accumulation, saturation, and output gating behavior are handled inside `pe`.
+- Typically, assert `clear` at the beginning of a dot-product phase, hold `valid_i` during streaming, then assert `done` to read `r_ij`.
