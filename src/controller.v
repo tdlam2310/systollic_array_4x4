@@ -28,7 +28,7 @@ module controller(
 
     output       start_compute,
     output [4:0] instruction_o,
-    output [2:0] curr_state
+    //output [2:0] curr_state
 );
 
     localparam IDLE    = 2'b00;
@@ -41,7 +41,7 @@ module controller(
 
     assign instruction_o = instruction_i;
     assign start_compute = (current_state == COMPUTE);
-    assign curr_state    = current_state;
+    //assign curr_state    = current_state;
 
     always @(posedge clk) begin
         if (rst) begin
