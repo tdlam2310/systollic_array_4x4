@@ -158,13 +158,12 @@ The `pe` module is a **signed multiply–accumulate (MAC) processing element** d
 - **Outputs**
   - r_00 ... r_33`: 16 signed 16-bit results (one per PE), produced with saturation inside each PE
 Row 0 | r_00 | r_01 | r_02 | r_03 |
-+-----------+-----------+-----------+-----------+
+
 Row 1 | r_10 | r_11 | r_12 | r_13 |
-+-----------+-----------+-----------+-----------+
+
 Row 2 | r_20 | r_21 | r_22 | r_23 |
-+-----------+-----------+-----------+-----------+
+
 Row 3 | r_30 | r_31 | r_32 | r_33 |
-+-----------+-----------+-----------+-----------+
 ### Dataflow (Systolic Connections)
 - `a` values are forwarded horizontally via `a_o` wires: `pe_00 → pe_01 → pe_02 → pe_03`, etc.
 - `b` values are forwarded vertically via `b_o` wires: `pe_00 → pe_10 → pe_20 → pe_30`, etc.
