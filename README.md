@@ -322,3 +322,30 @@ In each iteration, datas from Memory A and Memory B are streamed in the way show
 - Designed to store tiled results for matrix sizes up to **16×16**.
 - Each tile occupies **16 consecutive memory locations**.
 
+## Instruction Controller (`instruction`)
+
+### Overview
+The `instruction` module implements a **small instruction memory and sequencer** for the systolic array system. It stores up to **4 instructions** (each 5 bits wide) and issues them **sequentially** to control matrix size and execution flow. The module automatically advances to the next instruction once the systolic array finishes the current operation.
+
+---
+
+### Functionality
+- Provides a **4-entry instruction memory** (`instr_mem[0..3]`).
+- Allows instructions to be written using `enI`, `addrI`, and `dataI`.
+- Outputs the **current instruction** via the `instruction` signal.
+- Advances to the next instruction when `systolic_array_done` is asserted.
+- Signals completion using `ap_done` when a zero instruction (`5'd0`) is reached.
+
+---
+
+### Instruction Flow
+1. Instructions are written into `instr_mem` at addresses `0–3`.
+2. Execution starts from `instr_mem[0]`.
+3. After each computation finishes (`systolic_array_done = 1`), the controller moves to the next instruction.
+4. When the current instruction is `0`, `ap_done` is asserted, indicating all instructions are complete.
+
+---
+
+### Notes
+- A value of `5'd0` acts as a **termination instruction**.
+- Designed to support chained matrix operations (e.g., 4×4 → 8×8 → 16×16).
