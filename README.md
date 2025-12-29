@@ -103,9 +103,9 @@ This instruction sequence causes the accelerator to perform a **4×4**, followed
 3. Run the script in Google Colab to generate the input files `a_file.txt` and `b_file.txt`.
 4. Use these files as inputs to the Vivado testbench.
 5. The testbench generates `c_out_file.txt`, which is then imported back into Google Colab for result verification. You should download c_out_file.txt and put it into your google colab notebook before you run the python script.
-### Picture: Output of A and B so you can see how the two data files look like
+### Picture: I printed out A and B so you can see how the two data files look like
 ![Figure 5: Filling instruction memory initialization](colab1.png)
-### Picture: Comparision between my output with my golden model (NO MISMATCHES HAPPENED)
+### Picture: Comparison between my output from Vivado's testbench with my golden model (NO MISMATCHES HAPPENED)
 ![Figure 5: Filling instruction memory initialization](colab2.png)
 ⚠️ **Important:** Verification with the Python model is performed only for the final instruction (`16`), as output memory is overwritten and data from previous instructions is not preserved.
 
