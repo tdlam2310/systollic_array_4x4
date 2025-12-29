@@ -107,6 +107,8 @@ This instruction sequence causes the accelerator to perform a **4×4**, followed
 ![Figure 5: Filling instruction memory initialization](colab1.png)
 ### Picture: Comparision between my output with my golden model (NO MISMATCHES HAPPENED)
 ![Figure 5: Filling instruction memory initialization](colab2.png)
+**Note:** Only the final instruction (`16`) is verified, as output memory is overwritten and data from previous instructions is not preserved.
+
 
 ## Architecture
 Block diagram from vivado: we have memory_output that stores the output of the systollic array, instruction memory that stores instruction, and DUT block that contains the controller, two memory blocks A and B that feed the data into the array, and the 4x4 systollic array itself
