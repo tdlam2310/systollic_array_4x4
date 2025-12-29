@@ -1,6 +1,6 @@
 # 4×4 Systolic Array Accelerator
 
-In this project, I designed and verified a **4×4 systolic array accelerator** in SystemVerilog that performs matrix–matrix multiplication using **16-bit fixed-point arithmetic**. I also built the full system around the array, including memories, a controller, a testbench, and evaluated the design’s **power, performance, and area (PPA)**.
+In this project, I designed and verified a **4×4 systolic array accelerator** in Verilog that performs matrix–matrix multiplication using **16-bit fixed-point arithmetic**. I also built the full system around the array, including memories, a controller, a testbench, and evaluated the design’s **power, performance, and area (PPA)**.
 ![drawing](arch.drawio.png)
 ---
 
@@ -13,7 +13,7 @@ My goal was to implement a complete hardware accelerator, not just the compute c
 - An instruction memory that controls execution
 - An output memory to store results
 - A controller that orchestrates data movement and computation
-- A full SystemVerilog testbench and Python golden model for verification
+- A full Verilog testbench and Python golden model for verification
 
 The system supports multiple matrix sizes through an instruction stream and follows a clean `ap_start / ap_done` execution model.
 
